@@ -1,7 +1,26 @@
 # Repository overview
 This repository is designed to acquire images from the remote sensing dataset Sentinel-2, train and predict using vision deep learning models using various balanced training methods, and visualize results using the LOTS visualization technique.
 
-## Image Extraction Script
+### Imbalanced Regression Result
+To solve imbalanced regression, multiple experiments are conducted:
+
+| Experiment                      | b-MAE   | MAE    |
+|---------------------------------|---------|--------|
+| L2 Loss (benchmark)             | 0.4873  | 0.2357 |
+| Absolute L3 Loss                | 0.4070  | 0.2283 |
+| Weighted L2 Loss (α = 0.25)     | 0.4054  | 0.2207 |
+| Weighted L2 Loss (α = 0.5)      | 0.4017  | 0.2259 |
+| Weighted L2 Loss (α = 0.75)     | 0.4036  | 0.2492 |
+| Weighted L2 Loss (α = 1.0)      | 0.4101  | 0.2970 |
+| Resampling (α = 0.25)           | 0.4159  | 0.2136 |
+| Resampling (α = 0.5)            | 0.4187  | 0.2197 |
+| Resampling (α = 0.75)           | 0.4073  | 0.2164 |
+| Resampling (α = 1.0)            | 0.4218  | 0.2234 |
+| BMC Loss                        | 0.4540  | 0.2775 |
+
+Balanced training not only improve b-MAE (balanced Mean Absolute Error) but also improves overall accuracy.
+
+### Image Extraction Script
 The script `image.ipynb` is designed to extract images from the Sentinel-2 and Dynamic World V1 datasets using Google Earth Engine. The main functionality involves retrieving the least cloudy satellite images for specific geographical locations and time periods, processing these images, and exporting them for further analysis. 
 
 To extract images from the Sentinel dataset, please refer to the `extract_GPS_images` directory, specifically the script `image.ipynb`. This will generate TFRecord files of the satellite images.
